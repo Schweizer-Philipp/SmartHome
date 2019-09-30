@@ -1,0 +1,51 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    background-image: linear-gradient(to right top, #283c52, #2b4056, #2e445a, #32485e, #354c62, #354c62, #354c62, #354c62, #32485e, #2e445a, #2b4056, #283c52);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #6fe091;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #222;
+}
+
+/* remove outline coming from bootstrap */
+a:focus,
+button:focus {
+    outline: none !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.z-depth-2 {
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.z-depth-3 {
+    -webkit-box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 11px 7px 0 rgba(0, 0, 0, 0.19), 0 13px 25px 0 rgba(0, 0, 0, 0.3);
+}

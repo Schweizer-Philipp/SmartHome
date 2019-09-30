@@ -1,0 +1,60 @@
+.content {
+    margin-top: 120px;
+    color: white;
+}
+
+@media(max-width: 400px) {
+    .content {
+        margin-top: 180px;
+    }
+}
+
+.equal {
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.tile {
+    flex: 1;
+    margin: 15px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.equal-stretch {
+    display: flex;
+    flex-direction: column;
+}
+
+.equal-stretch__stretch {
+    flex: 1;
+}
+
+div.tile div:hover > span.fa,
+div.active-tile span.fa {
+    color: #6fe091;
+    cursor: pointer;
+}
+
+.tile .expandable,
+.tile .toggable {
+    user-select: none;
+    /* supported by Chrome and Opera */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    cursor: pointer;
+}
+
+
+.tile .tile__title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+

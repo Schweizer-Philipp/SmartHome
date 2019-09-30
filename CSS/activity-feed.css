@@ -1,0 +1,34 @@
+ul.activity-feed {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 180px;
+    overflow: auto;
+    user-select: none;
+}
+
+li.activity-feed__item {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+li.activity-feed__item .activity-feed__item_icon {
+    padding: 10px 15px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 10px;
+}
+
+li.activity-feed__item .activity-feed__item_content .title {
+    font-size: 1.2em;
+}
+
+li.activity-feed__item .activity-feed__item_content .timestamp {
+    font-size: .9em;
+    color: #b8b8b8;
+}

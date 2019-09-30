@@ -1,0 +1,38 @@
+nav.navbar-inverse {
+    border: none;
+    background-image: linear-gradient(to right, #283c52, #2b4056, #2e445a, #32485e, #354c62, #354c62, #354c62, #354c62, #32485e, #2e445a, #2b4056, #283c52);
+    padding: 15px;
+}
+
+.navbar-header .navbar-brand {
+    color: #e6e6e6;
+    font-size: 1.7em;
+}
+
+.navbar-header .navbar-brand:hover {
+    color: #e6e6e6;
+}
+
+.navbar .navbar-nav a {
+    font-size: 1.2em;
+}
+
+.navbar .navbar-nav li.active a {
+    color: white;
+    background: transparent;
+}
+
+.navbar-brand {
+    line-height: 1.2em;
+}
+
+button.navbar-toggle {
+    border: none;
+}
+
+.navbar-header button.navbar-toggle,
+.navbar-header button.navbar-toggle:hover,
+.navbar .navbar-nav a:hover,
+.navbar .navbar-nav li.active a {
+    background: transparent !important;
+}

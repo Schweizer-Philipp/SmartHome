@@ -1,0 +1,3 @@
+div.expandable-pane:not(:first-of-type) {
+    display: none;
+}

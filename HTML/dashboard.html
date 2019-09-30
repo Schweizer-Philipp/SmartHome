@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Smarthome Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/loginpage.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/content.css">
+    <link rel="stylesheet" href="../assets/css/custom-scrollbar.css">
+    <link rel="stylesheet" href="../assets/css/activity-feed.css">
+    <link rel="stylesheet" href="../assets/css/expandable-tabs.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container full-width">
+        <nav class="navbar navbar-inverse navbar-fixed-top z-depth-2 ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Smarthome Dashboard</a>
+                    <button type="button" class="navbar-toggle collapsed " data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-cog"></span> Einstellungen</a>
+                        </li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container content full-width">
+            <div class="row equal">
+                <div class="col-xs-12 col-md-12 col-lg-6 equal-stretch">
+                    <div class="tile z-depth-2">
+                        <h4>Activity Feed</h4>
+                        <ul class="activity-feed"></ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-6 equal-stretch">
+                    <div class="row tile z-depth-2 equal-stretch__stretch">
+                        <div class="col-xs-6 col-md-3 col-lg-3 text-center toggable" data-source="Licht">
+                            <span class="fa fa-lightbulb-o fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">Licht</span>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 text-center toggable" data-source="TV">
+                            <span class="fa fa-television fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">TV</span>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 text-center toggable" data-source="PC">
+                            <span class="fa fa-laptop fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">PC</span>
+                        </div>
+                        <div class="col-xs-6 col-md-3 col-lg-3 text-center toggable" data-source="Lüfter">
+                            <span class="fa fa-thermometer-0 fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">Lüfter</span>
+                        </div>
+                    </div>
+                    <div class="row tile z-depth-2 equal-stretch__stretch">
+                        <div class="col-xs-3 col-md-3 col-lg-3 text-center expandable active" data-tab-link="jobs-configurator-panel">
+                            <span class="fa fa-hourglass-o fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">Jobs</span>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-lg-3 text-center expandable" data-tab-link="led-remote-panel">
+                            <span class="fa fa-keyboard-o fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">LEDs</span>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-lg-3 text-center expandable">
+                            <span class="fa fa-keyboard-o fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">LEDs</span>
+                        </div>
+                        <div class="col-xs-3 col-md-3 col-lg-3 text-center expandable">
+                            <span class="fa fa-keyboard-o fa-3x"></span>
+                            <br /><br />
+                            <span class="tile__title">LEDs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row equal">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div class="tile z-depth-2">
+                        <div class="expandable-pane active" data-tab-link="jobs-configurator-panel">
+                            Jobs Configurator
+                        </div>
+                        <div class="expandable-pane" data-tab-link="led-remote-panel">
+                            LED Remote Panel
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://use.fontawesome.com/863f023ea7.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../assets/js/widgets/LoginFormWidget.js"></script>
+    <script src="../assets/js/widgets/TileWidget.js"></script>
+    <script src="../assets/js/widgets/ExpandableTabsWidget.js"></script>
+</body>
+
+</html>
