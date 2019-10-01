@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/main.css">
-        <link rel="stylesheet" href="assets/css/loginpage.css">
+        <link rel="stylesheet" href="../CSS/main.css">
+        <link rel="stylesheet" href="../CSS/loginpage.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -15,7 +15,7 @@
             <div class="panel panel-info z-depth-3">
                 <div class="panel-body">
                     <div id="login-alert" class="alert alert-danger col-sm-12"></div>
-                    <form action="http://127.0.0.1:5400/login" id="loginform" class="form-horizontal" role="form" method="POST">
+                    <form  id="loginform" class="form-horizontal" role="form" > <!-- action="http://127.0.0.1:5400/login" method="POST" -->
                                 
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -29,7 +29,7 @@
                                 
                         <div class="form-group">
                             <div class="col-sm-12 controls">
-                                <button type="submit" id="btn-login" type="button" class="btn btn-primary btn-lg btn-block">Login</button>
+                                <button id="btn-login" type="button" class="btn btn-primary btn-lg btn-block">Login</button> <!-- type="submit" -->
                             </div>
                         </div>
                     </form>  
@@ -40,6 +40,6 @@
         <script src="https://use.fontawesome.com/863f023ea7.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script src="assets/js/widgets/LoginFormWidget.js"></script>
+        <script src="../JS/LoginFormWidget.js"></script>
     </body>
 </html>

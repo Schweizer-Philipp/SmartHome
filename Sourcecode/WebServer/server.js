@@ -3,12 +3,12 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(express.static(__dirname+'/www'));
+//app.use(express.static(__dirname+'/www')); ?
 app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.get('/', function(request, response) {
-    response.sendFile(__dirname + '/www/LogIn.html');
+    response.sendFile(__dirname + '../../HTML/LogIn.html');
 });
 
 app.post('/login', function(request, response){
@@ -27,7 +27,7 @@ app.post('/login', function(request, response){
 
 
 app.get('/dashboard', function(request, response) {
-    response.sendFile(__dirname + '/www/pages/dashboard.html');
+    response.sendFile(__dirname + '../../HTML/LogIn.html');
 });
 
 app.get('/dashboard/activityfeed', function(request, response){

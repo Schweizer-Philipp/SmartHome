@@ -3,7 +3,7 @@
 
 #include <string.h>
 #include <math.h>
-#include <pigpio.h>
+#include "../PIGPIO/pigpio.h"
 
 #define MAX_COMMAND_SIZE 512
 #define MAX_PULSES 12000

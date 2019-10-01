@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../ir-slinger-master/irslinger.h"
+#include "../../Libs/ir-slinger-master/irslinger.h"
 
 int main(int argc, char *argv[])
 {

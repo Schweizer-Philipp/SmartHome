@@ -13,7 +13,7 @@ var LoginFormWidget = {
     },
 
     doLogin: function() {
-        document.location.href="pages/dashboard.html";
+        document.location.href="../HTML/dashboard.html";
     }
 }
 

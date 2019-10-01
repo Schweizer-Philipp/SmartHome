@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../ir-slinger-master/irslinger.h"
+#include "../../Libs/ir-slinger-master/irslinger.h"
 
 int main(int argc, char *argv[]) {
     
