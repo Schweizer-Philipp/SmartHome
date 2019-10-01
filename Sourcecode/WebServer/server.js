@@ -1,14 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var app = express();
 
-//app.use(express.static(__dirname+'/www')); ?
+app.use(express.static(__dirname + '/www/'));
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(cors());
 
 app.get('/', function(request, response) {
-    response.sendFile(__dirname + '../../HTML/LogIn.html');
+    response.sendFile(__dirname + '/www/HTML/LogIn.html');
 });
 
 app.post('/login', function(request, response){
@@ -17,18 +18,17 @@ app.post('/login', function(request, response){
     var password = request.body.password;
 
     if(username == "admin" && password == "1234") {
-        
-	/*response.redirect('/dashboard');*/
-	response.send("drin");
+        response.redirect('/dashboard');
     } else {
         response.send("Wrong credentials...");
     }
 });
 
-
-app.get('/dashboard', function(request, response) {
-    response.sendFile(__dirname + '../../HTML/LogIn.html');
+app.get('/dashboard', function(request, response){
+    
+	response.sendFile(__dirname + '/www/HTML/dashboard.html')
 });
+
 
 app.get('/dashboard/activityfeed', function(request, response){
     var activityFeedAsJson = {
@@ -53,6 +53,20 @@ app.get('/dashboard/activityfeed', function(request, response){
         ]
     };
     response.status(200).send(JSON.stringify(activityFeedAsJson));
+});
+
+app.post('/dashboard/:source/power', function(request, response){
+    console.log("request incoming...");
+    console.log(request.params.source);
+    console.log("isActive: " + request.body.power);
+
+    response.status(200).send(JSON.stringify({
+        message: "creation successful",
+        data: {
+            title: "foo",
+            timpestamp: "...."
+        }
+    }));
 });
 
 app.listen(5400, function(error) {
