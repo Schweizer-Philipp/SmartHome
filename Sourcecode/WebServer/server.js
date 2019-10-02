@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var {PythonShell} = require('python-shell');
 
 var app = express();
 
@@ -55,19 +56,66 @@ app.get('/dashboard/activityfeed', function(request, response){
     response.status(200).send(JSON.stringify(activityFeedAsJson));
 });
 
-app.post('/dashboard/:source/power', function(request, response){
+app.post('/dashboard/:source/', function(request, response){
+    
     console.log("request incoming...");
     console.log(request.params.source);
-    console.log("isActive: " + request.body.power);
+    
+    var p = sendIrSignal(request.params.source, request);
 
-    response.status(200).send(JSON.stringify({
-        message: "creation successful",
-        data: {
-            title: "foo",
-            timpestamp: "...."
-        }
-    }));
+    p.then(function(){
+        response.status(200).send(JSON.stringify({
+            message: "creation successful",
+            data: {
+                title: "foo",
+                timpestamp: "...."
+            }
+        }));
+    }).catch(function(error){
+
+        response.status(500).send(JSON.stringify({
+            message: "Error: " + error,
+            data: {
+                title: "foo",
+                timpestamp: "...."
+            }
+        }));
+    });
 });
+
+
+
+var options = {
+    scriptPath: __dirname + "/scripts/"
+};
+
+function sendIrSignal(source, request) {
+    return new Promise(function(resolve, reject){
+        console.log("do something static");
+        console.log("source is " + source);
+        
+        options["args"] =  [source];
+
+        var values = ["BTN"];
+        for(var key in request.body) {
+            values.push(request.body[key]);
+        }
+        options["args"].push(values.join("_"));
+        
+        var pyshell = new PythonShell('irTransmitter.py',options);
+            
+        pyshell.on('message', function (message) {
+            console.log(message);
+            if(message !=0) {
+                reject("Fehler beim irTransmitter script");
+            }
+            resolve();
+        });
+    });
+}
+
+
+
 
 app.listen(5400, function(error) {
     if(error) {

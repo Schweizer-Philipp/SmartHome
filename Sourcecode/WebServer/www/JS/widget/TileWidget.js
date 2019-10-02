@@ -19,9 +19,9 @@ var TileWidget = {
 
                 //activityFeed.prepend(TileWidget.createEntry(source, isActive ? "angeschaltet" : "ausgeschaltet"));*/
 
-                var url = "http://192.168.178.52:5400/dashboard/"+source+"/power";
+                var url = "http://192.168.178.52:5400/dashboard/"+source;
                 var body = {
-                    "power": isActive
+                    button: "mode"
                 };
                 $.post(url, body)
                     .done( function(response) {
