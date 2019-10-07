@@ -60,24 +60,37 @@ app.post('/dashboard/:source/', function(request, response){
     
     console.log("request incoming...");
     console.log(request.params.source);
+
+    var button = ["BTN"];
+    for(var key in request.body) {
+        button.push(request.body[key]);
+    }
+    button = button.join("_");
+
+    console.log(button)
     
-    var p = sendIrSignal(request.params.source, request);
+    var p = sendIrSignal(request.params.source, button);
+
+    console.log(p)
 
     p.then(function(){
+        console.log(p)
+        console.log("Ich bin bei then");
         response.status(200).send(JSON.stringify({
-            message: "creation successful",
+            message: "IR Signal Erfolgreich gesendet, Button: " + values,
             data: {
-                title: "foo",
-                timpestamp: "...."
+                title: "mal sehn",
+                timpestamp: getTimeStamp()
             }
         }));
     }).catch(function(error){
-
+        console.log(p)
+        console.log("Ich bin bei catch");
         response.status(500).send(JSON.stringify({
-            message: "Error: " + error,
+            message: "Serverfehler bitte den Admin kontaktieren, dieser wird sich dann an Robert wenden: " + error,
             data: {
-                title: "foo",
-                timpestamp: "...."
+                title: "mal sehn",
+                timpestamp: getTimeStamp()
             }
         }));
     });
@@ -89,33 +102,45 @@ var options = {
     scriptPath: __dirname + "/scripts/"
 };
 
-function sendIrSignal(source, request) {
+function sendIrSignal(source, button) {
     return new Promise(function(resolve, reject){
         console.log("do something static");
         console.log("source is " + source);
         
         options["args"] =  [source];
 
-        var values = ["BTN"];
-        for(var key in request.body) {
-            values.push(request.body[key]);
-        }
-        options["args"].push(values.join("_"));
+        
+        options["args"].push(button);
+
+        console.log(options);
         
         var pyshell = new PythonShell('irTransmitter.py',options);
             
         pyshell.on('message', function (message) {
             console.log(message);
             if(message !=0) {
+                
+                console.log("ich bin bei reject");
                 reject("Fehler beim irTransmitter script");
             }
+            console.log("ich bin bei resolve");
             resolve();
         });
     });
 }
 
 
+function getTimeStamp(){
 
+    var today = new Date();
+
+    var timestamp = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ' Uhr - ' + 
+                    today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
+
+    console.log(timestamp)
+
+    return timestamp
+}
 
 app.listen(5400, function(error) {
     if(error) {
