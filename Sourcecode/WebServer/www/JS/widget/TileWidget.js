@@ -26,18 +26,18 @@ var TileWidget = {
                 };
                 $.post(url, body)
                     .done( function(response) {
-                        activityFeed.prepend(TileWidget.createEntry(source,JSON.parse(response).message,JSON.parse(response).data.timestamp));
-
+                        var basis = JSON.parse(response);
+                        activityFeed.prepend(TileWidget.createEntry(source, basis.data.title,basis.message, basis.data.timestamp));
                     })
                     .fail(function(error) {
-                        console.log("error");
-                        activityFeed.prepend(TileWidget.createEntry(source,JSON.parse(response).message,JSON.parse(response).data.timestamp));
+                        var basis = JSON.parse(error.responseText);
+                        activityFeed.prepend(TileWidget.createEntry(source, basis.data.title,basis.message, basis.data.timestamp));
                     });
             })
         })
     },
 
-    createEntry: function(source, message, timestamp) {
+    createEntry: function(source, title, message, timestamp) {
         
 
         var sourceIconMapper = {
@@ -49,7 +49,9 @@ var TileWidget = {
                     .append('<div class="activity-feed__item_icon"><i class="fa ' + sourceIconMapper[source] + ' fa-fw"></i></div>')
                     .append(
                         $('<div class="activity-feed__item_content">')
-                            .append('<span class="title">' + message + '</span>')
+                            .append('<span class="title">' + title + '</span>')
+                            .append('<br />')
+                            .append('<span class="message">' + message + '</span>')
                             .append('<br />')
                             .append('<span class="timestamp">' + timestamp +'</span>'));
     }

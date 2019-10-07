@@ -31,3 +31,10 @@
     -o-transform: scale(.98);
     transform: scale(.98);
 }
+.message{
+
+    flex: 1;
+    margin: 15px;
+    padding: 10px;
+    background-color: transparent;
+}

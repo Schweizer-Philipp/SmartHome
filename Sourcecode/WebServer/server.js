@@ -67,20 +67,16 @@ app.post('/dashboard/:source/', function(request, response){
     }
     button = button.join("_");
 
-    console.log(button)
-    
     var p = sendIrSignal(request.params.source, button);
-
-    console.log(p)
 
     p.then(function(){
         console.log(p)
         console.log("Ich bin bei then");
         response.status(200).send(JSON.stringify({
-            message: "IR Signal Erfolgreich gesendet, Button: " + values,
+            message: "IR Signal Erfolgreich gesendet, Button: " + button,
             data: {
-                title: "mal sehn",
-                timpestamp: getTimeStamp()
+                title: request.params.source,
+                timestamp: getTimeStamp()
             }
         }));
     }).catch(function(error){
@@ -89,8 +85,8 @@ app.post('/dashboard/:source/', function(request, response){
         response.status(500).send(JSON.stringify({
             message: "Serverfehler bitte den Admin kontaktieren, dieser wird sich dann an Robert wenden: " + error,
             data: {
-                title: "mal sehn",
-                timpestamp: getTimeStamp()
+                title: "Error",
+                timestamp: getTimeStamp()
             }
         }));
     });
@@ -136,8 +132,6 @@ function getTimeStamp(){
 
     var timestamp = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ' Uhr - ' + 
                     today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
-
-    console.log(timestamp)
 
     return timestamp
 }
