@@ -9,6 +9,11 @@ app.use(express.static(__dirname + '/www/'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
+var options = {
+    scriptPath: __dirname + "/scripts/"
+};
+
+
 app.get('/', function(request, response) {
     response.sendFile(__dirname + '/www/HTML/LogIn.html');
 });
@@ -92,11 +97,22 @@ app.post('/dashboard/:source/', function(request, response){
     });
 });
 
+app.get('/temperatureAndHumidity', function(equest, response){
 
+    console.log("da");
+    var pyshell = new PythonShell('read_Temperature_And_Humidity.py',options);
+    pyshell.on('message', function (message) {
+        console.log(message);
+        var values = message.split(";",2);
+        response.status(200).send(JSON.stringify({
+            data: {
+                temperature: values[0],
+                humidity: values[1]
+            }
+        }));
+    });
+});
 
-var options = {
-    scriptPath: __dirname + "/scripts/"
-};
 
 function sendIrSignal(source, button) {
     return new Promise(function(resolve, reject){
