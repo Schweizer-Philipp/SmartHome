@@ -1,4 +1,4 @@
 # General
 .DS_Store
-node_modules
-.orig
+node_modules/
+*.*c.orig
