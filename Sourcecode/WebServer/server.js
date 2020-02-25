@@ -2,12 +2,15 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var {PythonShell} = require('python-shell');
+var taskManager = require('./taskManager');
 
 var app = express();
 
 app.use(express.static(__dirname + '/www/'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+
+var specTaskManager = new taskManager();
 
 var options = {
     scriptPath: __dirname + "/scripts/"
@@ -66,11 +69,9 @@ app.post('/dashboard/:source/', function(request, response){
     console.log("request incoming...");
     console.log(request.params.source);
 
-    var button = ["BTN"];
-    for(var key in request.body) {
-        button.push(request.body[key]);
-    }
-    button = button.join("_");
+    var button = ["BTN"].concat(Objects.values(request.body)).join("_");
+    
+    console.log(button);
 
     var p = sendIrSignal(request.params.source, button);
 
@@ -95,6 +96,20 @@ app.post('/dashboard/:source/', function(request, response){
             }
         }));
     });
+});
+
+app.post('/task/', function(request, response){
+    
+   
+   
+    
+});
+
+app.delete('/task/:taskid', function(request, response){
+    
+   
+   
+    
 });
 
 app.get('/temperatureAndHumidity', function(equest, response){
@@ -153,6 +168,28 @@ function getTimeStamp(){
 }
 
 app.listen(5400, function(error) {
+
+    var test = {
+            cronTime: {
+                min: "30",
+                std: "14",
+                dayOfTheMonth: "18,20",
+                month: "*",
+                weekdays: "*"
+            },
+            periode: "4",
+            source: "test",
+            button: "test1"
+        };
+        
+    
+    var id = specTaskManager.addNewTask(test);
+    console.log(id);
+    console.log(specTaskManager.addNewTask(test));
+    console.log(specTaskManager.deleteTask("test"));
+    console.log(specTaskManager.deleteTask(id));
+    console.log(specTaskManager.addNewTask(test));
+    
     if(error) {
         console.log(error);
     } else {
