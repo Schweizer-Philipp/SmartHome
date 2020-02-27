@@ -46,4 +46,9 @@ module.exports = class Task
 			
 		return false;
 	}
+
+	toJSON = function()
+	{
+		return JSON.stringify({cronTime: this.cronTime, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button});
+	};
 }

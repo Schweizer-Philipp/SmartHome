@@ -1,4 +1,5 @@
 var task = require('./task');
+const fs = require('fs');
 
 module.exports = class TaskManager
 {
@@ -34,11 +35,11 @@ module.exports = class TaskManager
 		
 		if(cronTime["dayOfTheMonth"] === "*")
 		{
-			daysOfExecution = cronTime["weekdays"].split(",").length - 1;
+			daysOfExecution = cronTime["weekdays"].split(",").length;
 		}
 		else
 		{
-			daysOfExecution = cronTime["dayOfTheMonth"].split(",").length - 1;
+			daysOfExecution = cronTime["dayOfTheMonth"].split(",").length;
 		}
 		
 		var tmptask = this.taskList.find(t => t.equals(cronTimeAsString, data["periode"], daysOfExecution, data["source"], data["button"]));
@@ -51,6 +52,8 @@ module.exports = class TaskManager
 		
 		this.taskList.push(specTask);
 		
+		this.updateTaskFile();
+
 		return specTask.getID();
 	}
 	
@@ -65,6 +68,30 @@ module.exports = class TaskManager
 		
 		this.taskList.splice(index, 1);
 		
+		this.updateTaskFile();
+
 		return "Task erfolgreich gelöscht";
+	}
+
+	updateTaskFile()
+	{
+		fs.writeFileSync("task_administration_config.txt",JSON.stringify(this));
+	}
+
+	recoveryTasksFromFile(callback)
+	{
+		var data = fs.readFileSync("task_administration_config.txt", "utf8");
+		console.log(JSON.parse(data));
+		var rawData = JSON.parse(data)["taskList"];
+
+		console.log(rawData[0]["cronTime"]);
+
+		for(var i = 0; i< rawData.length;i++)
+		{
+			//console.log(rawData[0]["cronTime"]);
+			var specTask = new task(rawData["cronTime"], rawData["periode"], rawData["daysOfExecution"], callback, rawData["source"], rawData["button"]);
+		
+			this.taskList.push(specTask);
+		}
 	}
 }

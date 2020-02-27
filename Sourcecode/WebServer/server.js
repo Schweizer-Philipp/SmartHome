@@ -23,6 +23,7 @@ app.get('/', function(request, response) {
 
 app.post('/login', function(request, response){
 
+    console.log("login");
     var username = request.body.username;
     var password = request.body.password;
 
@@ -181,15 +182,35 @@ app.listen(5400, function(error) {
             source: "test",
             button: "test1"
         };
+
+    var test1 = {
+        cronTime: {
+            min: "30",
+            std: "14",
+            dayOfTheMonth: "18,20",
+            month: "*",
+            weekdays: "*"
+        },
+        periode: "5",
+        source: "test",
+        button: "test1"
+    };
         
     
-    var id = specTaskManager.addNewTask(test);
+    /*var id = specTaskManager.addNewTask(test);
     console.log(id);
     console.log(specTaskManager.addNewTask(test));
     console.log(specTaskManager.deleteTask("test"));
     console.log(specTaskManager.deleteTask(id));
     console.log(specTaskManager.addNewTask(test));
-    
+    console.log(specTaskManager.addNewTask(test1));*/
+
+    specTaskManager.recoveryTasksFromFile(sendIrSignal);
+
+    console.log(JSON.stringify(specTaskManager));
+
+
+
     if(error) {
         console.log(error);
     } else {

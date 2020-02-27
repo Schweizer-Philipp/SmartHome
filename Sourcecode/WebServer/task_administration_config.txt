@@ -1,2 +1,1 @@
-1;0;5;8;16;5;2020;TRUE;4,6;3
-2;1;5;8;16;5;2020;TRUE;4,6;3
+{"taskList":["{\"cronTime\":\"30 14 18,20 * *\",\"periode\":\"4\",\"daysOfExecution\":2,\"source\":\"test\",\"button\":\"test1\"}","{\"cronTime\":\"30 14 18,20 * *\",\"periode\":\"5\",\"daysOfExecution\":2,\"source\":\"test\",\"button\":\"test1\"}"]}
