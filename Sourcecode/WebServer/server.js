@@ -9,6 +9,7 @@ var app = express();
 app.use(express.static(__dirname + '/www/'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+app.use(bodyParser.json());
 
 var specTaskManager = new taskManager();
 
@@ -69,8 +70,9 @@ app.post('/dashboard/:source/', function(request, response){
     
     console.log("request incoming...");
     console.log(request.params.source);
+    console.log(request.body);
 
-    var button = ["BTN"].concat(Objects.values(request.body)).join("_");
+    var button = ["BTN"].concat(Object.values(request.body)).join("_");
     
     console.log(button);
 
@@ -101,16 +103,38 @@ app.post('/dashboard/:source/', function(request, response){
 
 app.post('/task/', function(request, response){
     
-   
-   
+    console.log(request.body);
+
+    var button = ["BTN"].concat(Object.values(request.body)).join("_");
     
+    console.log(button);
+
+    var message = specTaskManager.addNewTask(request.body,sendIrSignal);
+
+    if(!(message.includes("Error")))
+    {
+        response.status(200).send(JSON.stringify({
+            message: "Task wurde erfolgreich angelegt",
+            data: message
+        }));
+    }
+    else
+    {
+        response.status(500).send(JSON.stringify({
+            message: message
+        }));
+    }
 });
 
 app.delete('/task/:taskid', function(request, response){
     
-   
-   
-    
+    var message = specTaskManager.deleteTask(request.params.taskid);
+
+    var code = !(message.includes("Error")) ? 200 : 500;
+
+    response.status(500).send(JSON.stringify({
+         message: message
+    }));
 });
 
 app.get('/temperatureAndHumidity', function(equest, response){
@@ -170,7 +194,7 @@ function getTimeStamp(){
 
 app.listen(5400, function(error) {
 
-    var test = {
+    /*var test = {
             cronTime: {
                 min: "30",
                 std: "14",
@@ -185,7 +209,7 @@ app.listen(5400, function(error) {
 
     var test1 = {
         cronTime: {
-            min: "30",
+            min: "30",""
             std: "14",
             dayOfTheMonth: "18,20",
             month: "*",
@@ -197,17 +221,17 @@ app.listen(5400, function(error) {
     };
         
     
-    /*var id = specTaskManager.addNewTask(test);
+    var id = specTaskManager.addNewTask(test);
     console.log(id);
-    console.log(specTaskManager.addNewTask(test));
+    /*console.log(specTaskManager.addNewTask(test));
     console.log(specTaskManager.deleteTask("test"));
     console.log(specTaskManager.deleteTask(id));
     console.log(specTaskManager.addNewTask(test));
     console.log(specTaskManager.addNewTask(test1));*/
 
-    specTaskManager.recoveryTasksFromFile(sendIrSignal);
+    //specTaskManager.recoveryTasksFromFile(sendIrSignal);
 
-    console.log(JSON.stringify(specTaskManager));
+    //console.log(JSON.stringify(specTaskManager));*/
 
 
 

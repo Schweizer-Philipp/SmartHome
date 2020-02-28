@@ -19,7 +19,7 @@ var TileWidget = {
                 console.log(buttonName);
                 console.log(source);
 
-                var url = "localhost/dashboard/"+source;
+                var url = "http://localhost:5400/dashboard/"+source;
 
                 var body = {
                     buttonName: buttonName

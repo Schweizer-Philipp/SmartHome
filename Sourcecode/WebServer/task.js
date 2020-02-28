@@ -49,6 +49,6 @@ module.exports = class Task
 
 	toJSON = function()
 	{
-		return JSON.stringify({cronTime: this.cronTime, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button});
+		return JSON.stringify({cronTime: this.cronTime, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID});
 	};
 }

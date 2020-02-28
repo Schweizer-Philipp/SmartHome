@@ -54,11 +54,12 @@ module.exports = class TaskManager
 		
 		this.updateTaskFile();
 
-		return specTask.getID();
+		return JSON.parse(JSON.stringify(specTask));
 	}
 	
 	deleteTask(ID)
 	{
+		this.taskList.forEach(t => console.log(t.getID()));
 		var task = this.taskList.find(t => t.getID() === ID);
 		
 		if(task === undefined)
@@ -81,16 +82,13 @@ module.exports = class TaskManager
 	recoveryTasksFromFile(callback)
 	{
 		var data = fs.readFileSync("task_administration_config.txt", "utf8");
-		console.log(JSON.parse(data));
+	
 		var rawData = JSON.parse(data)["taskList"];
-
-		console.log(rawData[0]["cronTime"]);
 
 		for(var i = 0; i< rawData.length;i++)
 		{
-			//console.log(rawData[0]["cronTime"]);
-			var specTask = new task(rawData["cronTime"], rawData["periode"], rawData["daysOfExecution"], callback, rawData["source"], rawData["button"]);
-		
+			var taskRawData = JSON.parse(rawData[i]);
+			var specTask = new task(taskRawData["cronTime"], taskRawData["periode"], taskRawData["daysOfExecution"], callback, taskRawData["source"], taskRawData["button"]);
 			this.taskList.push(specTask);
 		}
 	}
