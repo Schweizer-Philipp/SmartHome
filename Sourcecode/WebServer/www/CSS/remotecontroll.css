@@ -1,0 +1,179 @@
+.grey
+{
+  background-color: grey;
+}
+.remotecontroll
+{
+  border: 4px solid black;
+  border-radius: 20px;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column; 
+  padding: 2rem 1rem;
+  color: black;
+  background-color: white;
+}
+
+.row-r
+{
+  display: flex;
+  justify-content: space-between;
+}
+.row-r > .col-r
+{
+  flex-grow: 1;
+  max-width: 49%;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.remotecontroll > .row-r:first-of-type
+{
+  margin-bottom: 5px;
+}
+
+.button
+{
+  line-height: 50px;
+  text-align:center;
+  min-height: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  max-width: 50px;
+  border-radius:50%;
+  font-size: 10px;
+  transition:all ease 0.3s;
+  user-select:none;
+}
+
+.button.active
+{
+  transform:scale(0.9);
+  box-shadow:inset 0px 0px 5px 1px #5a5a5aaa;
+}
+
+.button:hover
+{
+    cursor: pointer;
+}
+
+.button-wrapper
+{
+  position: relative;
+  padding: 5px;
+  flex-grow:1;
+}
+
+
+
+.red
+{
+  background-color: red;
+}
+
+.green
+{
+  background-color: green;
+}
+
+.blue
+{
+  background-color: blue;
+}
+.white
+{
+  background-color: white;
+}
+.black
+{
+  background-color: black;
+}
+.red-1
+{
+  background-color: #d64935;
+}
+
+.red-2
+{
+  background-color: #dc6638;
+}
+
+.red-3
+{
+  background-color: #dd9237;
+}
+
+.red-4
+{
+  background-color: #e0de3c;
+}
+
+.green-1
+{
+  background-color: #159538;
+}
+
+.green-2
+{
+  background-color: #dc6638;
+}
+
+.green-3
+{
+  background-color: #055e86;
+}
+
+.green-4
+{
+  background-color: #033186;
+}
+
+.blue-1
+{
+  background-color: #0c009e;
+}
+
+.blue-2
+{
+  background-color: #6b319f;
+}
+
+.blue-3
+{
+  background-color: #8b2b97;
+}
+
+.blue-4
+{
+  background-color: #ec50bb;
+}
+
+.white-font
+{
+  color: white;
+}
+.font-size-15
+{
+  font-size:15px;
+}
+
+.font-size-35
+{
+  font-size:35px;
+}
+.btl
+{
+  border-top-left-radius: 15px;
+}
+.btr
+{
+  border-top-right-radius: 15px;
+}
+.bbl
+{
+  border-bottom-left-radius: 15px;
+}
+.bbr
+{
+  border-bottom-right-radius: 15px;
+}

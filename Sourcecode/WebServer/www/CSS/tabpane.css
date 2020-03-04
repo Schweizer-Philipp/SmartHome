@@ -1,0 +1,93 @@
+.tab-pane {
+  position: relative;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+
+  background-image: linear-gradient(
+    to right top,
+    #283c52,
+    #2b4056,
+    #2e445a,
+    #32485e,
+    #354c62,
+    #354c62,
+    #354c62,
+    #354c62,
+    #32485e,
+    #2e445a,
+    #2b4056,
+    #283c52
+  );
+}
+
+.tab-pane > .tab > input[type="radio"] {
+  display: none;
+}
+
+.tab-pane .tab > label {
+  display: flex;
+  padding: 1rem 3rem;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0;
+  color: white;
+  align-items: center;
+}
+
+.tab-pane .tab ~ .tab {
+  margin-left: 1rem;
+}
+
+.tab-pane > .tab > .tab-content {
+  display: none;
+  overflow: hidden;
+  padding: 25px;
+  right: 0;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  background: #337fb9;
+  color: #dfdfdf;
+
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+
+  background-image: linear-gradient(
+    to right top,
+    #283c52,
+    #2b4056,
+    #2e445a,
+    #32485e,
+    #354c62,
+    #354c62,
+    #354c62,
+    #354c62,
+    #32485e,
+    #2e445a,
+    #2b4056,
+    #283c52
+  );
+}
+
+.tab-pane > .tab > [id^="tab"]:checked ~ .tab-content {
+  display: block;
+  opacity: 1;
+  transition: opacity 400ms ease-out;
+}
+
+.tab-pane > .tab > [id^="tab"]:checked + label {
+  top: 0;
+  color: white;
+}
+
+.tab-pane > .tab > [id^="tab"]:checked + label::after {
+  position: absolute;
+  content: "";
+  height: 2px;
+  background-color: #6fe091;
+  bottom: 2px;
+  left: 15px;
+  right: 15px;
+}

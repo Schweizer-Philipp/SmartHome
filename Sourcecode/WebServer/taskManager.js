@@ -92,4 +92,8 @@ module.exports = class TaskManager
 			this.taskList.push(specTask);
 		}
 	}
+	getAllTasks()
+	{
+		return JSON.stringify(this);
+	}
 }

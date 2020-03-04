@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Smarthome Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="../CSS/loginpage.css">
+    <link rel="stylesheet" href="../CSS/nav.css">
+    <link rel="stylesheet" href="../CSS/content.css">
+    <link rel="stylesheet" href="../CSS/custom-scrollbar.css">
+    <link rel="stylesheet" href="../CSS/activity-feed.css">
+    <link rel="stylesheet" href="../CSS/expandable-tabs.css">
+	<link rel="stylesheet" href="../CSS/philipp.css">
+    <link rel="stylesheet" href="../CSS/tabpane.css">
+    <link rel="stylesheet" href="../CSS/remotecontroll.css">
+    <link rel="stylesheet" href="../CSS/taskfeed.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container full-width">
+        <nav class="navbar navbar-inverse navbar-fixed-top z-depth-2 ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Smarthome Dashboard</a>
+                    <button type="button" class="navbar-toggle collapsed " data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#"><span class="glyphicon glyphicon-cog"></span> Einstellungen</a>
+                        </li>
+                        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container content full-width">
+            <div class="row equal">
+                <div class="col-xs-12 col-md-12 col-lg-6 equal-stretch">
+                    <div class="tile z-depth-2">
+                        <h4>Task Feed</h4>
+                        <ul class="activity-feed">
+                        <li>
+                            <div class="task">
+                                <div class="logo">
+                               <img src="data:image/png;base64,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">
+                                </div>
+                                <div class="content">
+                                  <h2>Custom Name</h2>
+                                  <p><span>Quelle</span>: Test &nbsp; <span>Aktion</span>: TestTESTESTEST <br> <span>Nächste
+                                  Ausführung</span>: 12.12.2020 um 13:07 Uhr</p>
+                                </div>
+                                <div class="buttonBar">
+                                  <div class="smallButton">
+                                    <img src="https://img.icons8.com/metro/52/000000/next.png">
+                                  </div>
+                                  <div class="smallButton">
+                                  <img src="https://img.icons8.com/ios-filled/50/000000/delete-forever.png">
+                                  </div>
+                                  <div class="smallButton">
+                                    <img src="https://img.icons8.com/ios-filled/50/000000/circled-chevron-down.png">
+                                  </div>
+                                </div>
+                              </div>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12 col-lg-6 equal-stretch">
+                	<div class="tab-pane tile z-depth-2">
+						<div class="tab">
+							<input type="radio" name="tabs" id="tab1" checked />
+							<label for="tab1"><span class="fa fa-lightbulb-o fa-2x"></span> &nbsp;LED</label>
+							<div class="tab-content tile z-depth-2 no-lrmargin">
+                                <div class="remotecontroll">
+                                <div class="row-r">
+                                    <div class="row-r">
+                                    <div class="button-wrapper grey btl bbl">
+                                        <div class="button white font-size-35" data-source="led_bett" data-button_name="bright">&#8593;</div>
+                                    </div>
+                                    <div class="button-wrapper grey btr bbr">
+                                        <div class="button white font-size-35" data-source="led_bett" data-button_name="dark">&#8595;</div>
+                                    </div>
+                                    </div>
+                                    <div class="row-r">
+                                    <div class="button-wrapper grey btl bbl">
+                                        <div class="button black white-font" data-source="led_bett" data-button_name="off">OFF</div>
+                                    </div>
+                                    <div class="button-wrapper grey btr bbr">
+                                        <div class="button red white-font" data-source="led_bett" data-button_name="on">ON</div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row-r">
+                                    <div class="button-wrapper grey btl">
+                                        <div class="button red font-size-15" data-source="led_bett" data-button_name="red">R</div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button green font-size-15" data-source="led_bett" data-button_name="green">G</div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button blue font-size-15" data-source="led_bett" data-button_name="blue">B</div>
+                                    </div>
+                                    <div class="button-wrapper grey btr bbr">
+                                        <div class="button white font-size-15" data-source="led_bett" data-button_name="white">W</div>
+                                    </div>
+                                </div>
+                                <div class="row-r">
+                                    <div class="button-wrapper grey">
+                                        <div class="button red-1" data-source="led_bett" data-button_name="red1"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button green-1" data-source="led_bett" data-button_name="green1"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button blue-1" data-source="led_bett" data-button_name="blue1"></div>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <div class="button grey" data-source="led_bett" data-button_name="flash">FLASH</div>
+                                    </div>
+                                </div>
+                                <div class="row-r">
+                                    <div class="button-wrapper grey">
+                                        <div class="button red-2" data-source="led_bett" data-button_name="red2"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button green-2" data-source="led_bett" data-button_name="green2"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button blue-2" data-source="led_bett" data-button_name="blue2"></div>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <div class="button grey" data-source="led_bett" data-button_name="strobe">STROBE</div>
+                                    </div>
+                                </div>
+                                <div class="row-r">
+                                    <div class="button-wrapper grey">
+                                        <div class="button red-3" data-source="led_bett" data-button_name="red3"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button green-3" data-source="led_bett" data-button_name="green3"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button blue-3" data-source="led_bett" data-button_name="blue3"></div>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <div class="button grey" data-source="led_bett" data-button_name="fade">FADE</div>
+                                    </div>
+                                </div>
+                                <div class="row-r">
+                                    <div class="button-wrapper grey bbl">
+                                        <div class="button red-4" data-source="led_bett" data-button_name="red4"></div>
+                                    </div>
+                                    <div class="button-wrapper grey">
+                                        <div class="button green-4" data-source="led_bett" data-button_name="green4"></div>
+                                    </div>
+                                    <div class="button-wrapper grey bbr">
+                                        <div class="button blue-4" data-source="led_bett" data-button_name="blue4"></div>
+                                    </div>
+                                    <div class="button-wrapper">
+                                        <div class="button grey" data-source="led_bett" data-button_name="smooth">SMOOTH</div>
+                                    </div>
+                                </div>
+                                </div>
+							</div>
+						</div>
+						<div class="tab">
+							<input type="radio" name="tabs" id="tab2" />
+							<label for="tab2"> 
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABmJLR0QA/wD/AP+gvaeTAAAD+ElEQVRYhc2Xb2iWVRjGr2ezYrmJOYPe6B9OBzmjD1b++WISrIZSUflFMgSrYRTVpxVEUFQUEq4ksIhkZkXIEoKWSX+kWKs+aDpdZq1CzFVauWFLc/nrw7mGDw/Pu/e82zvofHk497nu61znPufc536k/1FLxuMEVEtaKGmepIKkmZKOSRqQ1CvpiyRJzlRKZDERDcArwG+ENgIcAfb6O2L7r8BGYNZkiKgDXgROAYeBZ4FFjlAaVw0sBp4Dfja+HZhaKSFXeOWDQBtQY3stcO4YfucDjwJDwNfA5RMVMsch/x6Ya1sL8I234wzQDTSPwdEE9Jtn9niFTPekfUC9bQuAf4BOYCWwBvjQou4cg6seOGCuaeMR8xbwe3o1FrEbqMpgNwN/AtPH4GsE/gC2lCvkOq92dcb+KfB6Dn4W8C+wqgTvGvPOL0fMdh/a7G15wXs/J8fnEPBUCd5qYB/QFStkpvPFPTljBeAHh3tFZqwP2BDB3wqcBmbEiFntkF9UZLwe2Orb9LhtF/jqP5aDTzL9gvnvihHzEtAbgWvz/h/ibGv1WA3wAHDQ9v3AbSnf/TFRFPAOsD0CVwOcBD7xNf/Yt28bcMxb0QncC3Q5Gkvt+wHQGSOmG+gYY7wKWAF85FWPJsO57vcAT5J6l4AE2Am8634H0J3lnpIz37CkuiJCGiS9LWm+wuuMpBZJfZKa3V+ZJMmPab8kSQB2SVpiU52kv4otOD3hFqAnx97kW/RdKtzrHI2h1NmoyfE9j5CBX3P/S3LyVZ6YR4DjZB5BE/STyrLAJT4LHYRH8RSwB7g+hZkKvAkMA/MsbAhoixFzjVfZnLI12bYsg73bB7XW/WuBXcYOAF95YSeAm425yeOls7APaD+wOWVrMUEhg30COJzDsYRQ07xMSAGF1NgbhCqgKutXTNB9hCx8VSYyN2Zwm4DdUaQBf7W3dW2sz2gOOejrOMW2PcDno2eJkHV/AjZFcp4DfAZ8m3fISzkvcnQ2uL/Ah/AA4cYNAEeJLJgImf00sLAsISmCtYSUv47w4l4JvOqIbSSilLTf8+ZpHZeQFNmD3uf3gEvL9L2MUI6MAPdPSEiK9AZvy7BvSUMJ/GxH82/CL8zSmHmif+IIye5hSQ9JmiZpn6QeSUckHZV0oaSLJS2W1CRpUFK7pPVJkgzGzlNWI/yi3AHs8HU/nvnuAG6nUv9KkaKe9tYl7ifAL5QoPSdDyHLC+7I+Y2+3fflkC2gEnuHsD1wXfpNSmFrgfY/3Gd9YaSG3Eqq6E4T6dxmZ2jaFTTy+1fiTwC2VFNNLKCfLSuN+VrYBe2PweZVeXpth7CqgHD2jc9SX61S0Of1PpO2Mmec/sSucoDWS+lkAAAAASUVORK5CYII=">
+                                 &nbsp; Ventilator</label>
+							<div class="tab-content tile z-depth-2 no-lrmargin">
+
+							</div>
+						</div>
+						<div class="tab">
+							<input type="radio" name="tabs" id="tab3" />
+							<label for="tab3"><span class="fa fa-thermometer-0 fa-2x"></span> &nbsp; Klimaanlage</label>
+							<div class="tab-content tile z-depth-2 no-lrmargin">
+
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+            <div class="row equal">
+                <div class="col-xs-12 col-md-12 col-lg-6 equal-stretch">
+                    <div class="tile z-depth-2">
+                        <h4>active Feed</h4>
+                        <ul class="activity-feed"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="<%= domain %>">
+    <script src="https://use.fontawesome.com/863f023ea7.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../js/widget/TileWidget.js"></script>
+    <script src="../js/widget/remotecontroll.js"></script>
+    <script src="../js/widget/ExpandableTabsWidget.js"></script>
+    <script src="../js/TemperatureAndHumidity.js"></script>
+    <script src="../js/widget/taskfeed.js"></script>
+</body>
+
+</html>

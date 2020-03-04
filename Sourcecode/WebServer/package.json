@@ -12,8 +12,10 @@
     "cors": "^2.8.5",
     "cron": "^1.8.2",
     "express": "^4.17.1",
+    "node-ejs": "^1.2.3",
     "nodemon": "^2.0.2",
     "object-hash": "^2.0.3",
+    "properties": "^1.2.1",
     "python-shell": "^1.0.8"
   },
   "author": "Philipp Schweizer",

@@ -3,9 +3,10 @@ const hash = require('object-hash');
 
 module.exports = class Task
 {
-	constructor(cronTime, periode, daysOfExecution, callback, source, button)
+	constructor(cronTime, customName, periode, daysOfExecution, callback, source, button)
 	{
 		this.cronTime = cronTime;
+		this.customName = customName;
 		this.periode = periode;
 		this.callback = callback;
 		this.countFunctioncalls = 0;
@@ -13,8 +14,9 @@ module.exports = class Task
 		this.source = source;
 		this.button = button;
 		this.border = daysOfExecution * this.periode;
-		this.cronJob = new CronJob(this.cronTime,callback);
+		this.cronJob = new CronJob(this.cronTime,this.cronJobFunction);
 		this.ID = hash(this);
+		console.log(cronJob.nextDates());
 		//cronJob.start();
 	}
 	
@@ -49,6 +51,6 @@ module.exports = class Task
 
 	toJSON = function()
 	{
-		return JSON.stringify({cronTime: this.cronTime, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID});
+		return JSON.stringify({cronTime: this.cronTime, customName: this.customName, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID});
 	};
 }
