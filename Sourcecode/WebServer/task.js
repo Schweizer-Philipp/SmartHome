@@ -16,7 +16,7 @@ module.exports = class Task
 		this.border = daysOfExecution * this.periode;
 		this.cronJob = new CronJob(this.cronTime,this.cronJobFunction);
 		this.ID = hash(this);
-		console.log(cronJob.nextDates());
+		//console.log(this.cronJob.nextDates());
 		//cronJob.start();
 	}
 	

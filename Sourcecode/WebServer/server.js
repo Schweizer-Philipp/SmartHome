@@ -35,7 +35,6 @@ app.get('/', function (request, response) {
 
 app.post('/login', function (request, response) {
 
-    console.log("login");
     var username = request.body.username;
     var password = request.body.password;
 
@@ -56,11 +55,12 @@ app.get('/dashboard', function (request, response) {
     });
 });
 
-app.get('/dashboard/activityfeed', function (request, response) {
+app.get('/activityfeed', function (request, response) {
+    
     var activityFeedAsJson = {
         feeds: [
             {
-                datasource: "Licht",
+                datasource: "led_bett",
                 title: "Licht wurde ausgeschalten",
                 timestamp: "14:46:22 Uhr - 26.9.2019"
             },

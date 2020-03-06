@@ -12,33 +12,39 @@ var TileWidget = {
         $('div.button').each(function () {
             $(this).on('click', function () {
 
+                var activityFeed1 = document.getElementById("activity-feed");
                 var activityFeed = $('ul.activity-feed');
                 var source = $(this).data('source');
                 var buttonName = $(this).data('button_name');
                 
 
                 var url = "http://localhost:5400/dashboard/"+source;
+                var url2 = "http://localhost:5400/activityfeed";
+                
 
-                console.log(ipAddress);
+                //console.log(ipAddress);
 
                 var body = {
                     buttonName: buttonName
                 };
-                /*$.post(url, body)
-                    .done( function(response) {
+                $.get(url2, body)
+                    .done(function(response) {
                         var basis = JSON.parse(response);
-                        activityFeed.prepend(TileWidget.createEntry(source, basis.data.title,basis.message, basis.data.timestamp));
+                        basis = basis["feeds"][0];
+                        activityFeed.prepend(TileWidget.createEntry(basis.datasource, basis.title,"basis.message", basis.timestamp));
+                        //console.log(TileWidget.createEntry(basis.datasource, basis.title,"basis.message", basis.timestamp))
                     })
                     .fail(function(error) {
                         var basis = JSON.parse(error.responseText);
                         activityFeed.prepend(TileWidget.createEntry(source, basis.data.title,basis.message, basis.data.timestamp));
-                    });*/
+                    });
             })
         })
     },
 
     createEntry: function(source, title, message, timestamp) {
         
+        //console.log(source);
 
         var sourceIconMapper = {
             'led_bett' : 'fa-lightbulb-o',

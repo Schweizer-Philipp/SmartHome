@@ -4,7 +4,10 @@ var remotecontroll =
 {
     init: function()
     {
-        const buttons = document.getElementsByClassName("button");
+        //const buttons = document.getElementsByClassName("button");
+        var buttons = [];
+        buttons = Array.prototype.concat.apply(buttons, document.getElementsByClassName("button"));
+        buttons = Array.prototype.concat.apply(buttons, document.getElementsByClassName("button-large"));
     
         for(var i = 0; i<buttons.length;i++)
         {

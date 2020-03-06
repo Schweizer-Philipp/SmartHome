@@ -1,19 +1,11 @@
-body
-{
-  height: 100vh;
-  background-image: linear-gradient(to right top, #283c52, #2b4056,         #2e445a, #32485e, #354c62, #354c62, #354c62, #354c62, #32485e, #2e445a,   #2b4056, #283c52);
-  
-}
 .task
 {
   box-shadow: 4px 4px 13px 0px black;
   padding: 10px;
   border: solid black 1px;
   border-radius: 10px;
-  width: 500px;
-  max-width: 500px;
   display: flex;
-  align-item: center;
+  margin: 20px;
 }
 .logo
 {
@@ -23,32 +15,28 @@ body
   padding: 8px;
   align-self: center;
 }
-.logo > img
-{
-  
-}
-.content
+.task-content
 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.content > *
+.task-content > *
 {
   margin: 0;
   
 }
-.content > p
+.task-content > p
 {
   font-size: 16px;
   color: #000000;
   margin-top: 10px;
 }
-.content > h2
+.task-content > h2
 {
   color: white;
 }
-.content span
+.task-content span
 {
   font-weight: bold;
 }
