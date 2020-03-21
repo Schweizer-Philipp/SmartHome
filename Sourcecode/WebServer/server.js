@@ -24,6 +24,7 @@ var options = {
 };
 
 var config = {};
+var activityfeed= [];
 
 
 app.get('/', function (request, response) {
@@ -57,28 +58,7 @@ app.get('/dashboard', function (request, response) {
 
 app.get('/activityfeed', function (request, response) {
     
-    var activityFeedAsJson = {
-        feeds: [
-            {
-                datasource: "led_bett",
-                title: "Licht wurde ausgeschalten",
-                timestamp: "14:46:22 Uhr - 26.9.2019"
-            },
-
-            {
-                datasource: "TV",
-                title: "TV wurde ausgeschalten",
-                timestamp: "14:46:22 Uhr - 26.9.2019"
-            },
-
-            {
-                datasource: "PC",
-                title: "Licht wurde ausgeschalten",
-                timestamp: "14:46:22 Uhr - 26.9.2019"
-            }
-        ]
-    };
-    response.status(200).send(JSON.stringify(activityFeedAsJson));
+    response.status(200).send(JSON.stringify(activityfeed));
 });
 
 app.post('/dashboard/:source/', function (request, response) {
@@ -94,25 +74,9 @@ app.post('/dashboard/:source/', function (request, response) {
     var p = sendIrSignal(request.params.source, button);
 
     p.then(function () {
-        console.log(p)
-        console.log("Ich bin bei then");
-        response.status(200).send(JSON.stringify({
-            message: "IR Signal Erfolgreich gesendet, Button: " + button,
-            data: {
-                title: request.params.source,
-                timestamp: getTimeStamp()
-            }
-        }));
+        response.status(200).send(JSON.stringify(activityfeed));
     }).catch(function (error) {
-        console.log(p)
-        console.log("Ich bin bei catch");
-        response.status(500).send(JSON.stringify({
-            message: "Serverfehler bitte den Admin kontaktieren, dieser wird sich dann an Robert wenden: " + error,
-            data: {
-                title: "Error",
-                timestamp: getTimeStamp()
-            }
-        }));
+        response.status(500).send(JSON.stringify(activityfeed));
     });
 });
 
@@ -157,12 +121,11 @@ app.get('/allTasks', function (request, response) {
 
 });
 
-app.get('/temperatureAndHumidity', function (equest, response) {
+app.get('/temperatureAndHumidity', function (request, response) {
 
     console.log("da");
     var pyshell = new PythonShell('read_Temperature_And_Humidity.py', options);
     pyshell.on('message', function (message) {
-        console.log(message);
         var values = message.split(";", 2);
         response.status(200).send(JSON.stringify({
             data: {
@@ -192,9 +155,24 @@ function sendIrSignal(source, button) {
             console.log(message);
             if (message != 0) {
 
+                activity = {
+                    source: source,
+                    button: button,
+                    timestamp: getTimeStamp(),
+                    message: "Fehler beim irTransmitter script"
+                };
+                activityfeed.unshift(activity);
+
                 console.log("ich bin bei reject");
                 reject("Fehler beim irTransmitter script");
             }
+            activity = {
+                source: source,
+                button: button,
+                timestamp: getTimeStamp(),
+                message: "Ausführung Erfolgreich"
+            };
+            activityfeed.unshift(activity);
             console.log("ich bin bei resolve");
             resolve();
         });
@@ -206,8 +184,7 @@ function getTimeStamp() {
 
     var today = new Date();
 
-    var timestamp = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds() + ' Uhr - ' +
-        today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear();
+    var timestamp = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()+ ' um '+today.getHours() + ':' + today.getMinutes()+' Uhr';
 
     return timestamp
 }
