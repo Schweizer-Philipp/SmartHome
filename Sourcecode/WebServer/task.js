@@ -16,22 +16,21 @@ module.exports = class Task
 		this.border = daysOfExecution * this.periode;
 		this.cronJob = new CronJob(this.cronTime,this.cronJobFunction);
 		this.ID = hash(this);
-		//console.log(this.cronJob.nextDates());
 		//cronJob.start();
 	}
 	
 	cronJobFunction()
 	{
-		countFunctioncalls++;
+		this.countFunctioncalls++;
 		
-		if(countFunctioncalls>daysOfExecution && countFunctioncalls<= border)
+		if(this.countFunctioncalls>this.daysOfExecution && this.countFunctioncalls<= this.border)
 		{
-			if(border == countFunctioncalls)
-				countFunctioncalls = 0;
+			if(this.border == this.countFunctioncalls)
+			this.countFunctioncalls = 0;
 		}
 		else
 		{
-			callback(source, button);
+			callback(this.source, this.button);
 		}
 		
 	}
@@ -39,6 +38,24 @@ module.exports = class Task
 	getID()
 	{
 		return this.ID;
+	}
+
+	getNextExecutionDay()
+	{
+		var tempCountFunctioncalls = this.countFunctioncalls + 1; // +1 simuliert den ersten call von Cronjob
+		var datePosition = 0;
+		while(tempCountFunctioncalls>this.daysOfExecution && tempCountFunctioncalls<= this.border)
+		{
+			if(this.border == tempCountFunctioncalls)
+			{
+				datePosition++;
+				break;
+			}
+			tempCountFunctioncalls++;
+			datePosition++;
+		}
+
+		return this.cronJob.nextDates(datePosition+1)[datePosition].format();
 	}
 	
 	equals(cronTime, periode, daysOfExecution, source, button)
@@ -51,6 +68,6 @@ module.exports = class Task
 
 	toJSON = function()
 	{
-		return JSON.stringify({cronTime: this.cronTime, customName: this.customName, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID});
+		return JSON.stringify({cronTime: this.cronTime, customName: this.customName, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID, nextExecutionDay: this.getNextExecutionDay()});
 	};
 }

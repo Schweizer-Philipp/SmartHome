@@ -4,7 +4,7 @@ function allUpdates()
 {
     ipAddress = document.querySelector('input[type="hidden"]').value;
     updateTemperature(ipAddress);
-    updateActivityFeed(ipAddress)
+    updateActivityFeed(ipAddress);
 }
 
 function updateTemperature(ipAddress)
@@ -29,6 +29,7 @@ function updateActivityFeed(ipAddress)
     $.get(url)
         .done(function(response) {
             var activityFeed = $('ul#activity-feed');
+            activityFeed.empty();
             var basis = JSON.parse(response);
             for(var i = basis.length-1; i>=0;i--)
             {
@@ -42,4 +43,4 @@ function updateActivityFeed(ipAddress)
 
 allUpdates();
 
-window.setInterval("allUpdates()",60000*60);
+window.setInterval(allUpdates(),60*60000);

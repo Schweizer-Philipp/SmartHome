@@ -82,23 +82,24 @@ app.post('/dashboard/:source/', function (request, response) {
 
 app.post('/task', function (request, response) {
 
-    console.log(request.body);
+    var button = ["BTN"].concat(request.body["button"]).join("_");
 
-    var button = ["BTN"].concat(Object.values(request.body)).join("_");
-
-    console.log(button);
+    request.body["button"] = button;
 
     var message = specTaskManager.addNewTask(request.body, sendIrSignal);
 
+    console.log(specTaskManager.getAllTasks());
+
     if (!(message.includes("Error"))) {
         response.status(200).send(JSON.stringify({
-            message: "Task wurde erfolgreich angelegt",
-            data: message
+            message: message,
+            allTasks: JSON.parse(specTaskManager.getAllTasks())
         }));
     }
     else {
         response.status(500).send(JSON.stringify({
-            message: message
+            message: message,
+            allTasks: JSON.parse(specTaskManager.getAllTasks())
         }));
     }
 });
@@ -110,20 +111,20 @@ app.delete('/task/:taskid', function (request, response) {
     var code = !(message.includes("Error")) ? 200 : 500;
 
     response.status(code).send(JSON.stringify({
-        message: message
+        message: message,
+        allTasks: JSON.parse(specTaskManager.getAllTasks())
     }));
 });
 
 app.get('/allTasks', function (request, response) {
     response.status(200).send(JSON.stringify(
-        specTaskManager.getAllTasks()
+        JSON.parse(specTaskManager.getAllTasks())
     ));
 
 });
 
 app.get('/temperatureAndHumidity', function (request, response) {
 
-    console.log("da");
     var pyshell = new PythonShell('read_Temperature_And_Humidity.py', options);
     pyshell.on('message', function (message) {
         var values = message.split(";", 2);

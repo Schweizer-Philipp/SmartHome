@@ -48,13 +48,13 @@ module.exports = class TaskManager
 			return "Error: Task gibt es schon";
 		
 		
-		var specTask = new task(cronTimeAsString, data["periode"], daysOfExecution, callback, data["source"], data["button"]);
+		var specTask = new task(cronTimeAsString, data["customName"], data["periode"], daysOfExecution, callback, data["source"], data["button"]);
 		
 		this.taskList.push(specTask);
 		
-		this.updateTaskFile();
+		//this.updateTaskFile();
 
-		return JSON.parse(JSON.stringify(specTask));
+		return  "Task wurde erfolgreich angelegt";
 	}
 	
 	deleteTask(ID)
@@ -82,14 +82,16 @@ module.exports = class TaskManager
 	recoveryTasksFromFile(callback)
 	{
 		var data = fs.readFileSync("task_administration_config.txt", "utf8");
-	
-		var rawData = JSON.parse(data)["taskList"];
-
-		for(var i = 0; i< rawData.length;i++)
+		if(data !== "")
 		{
-			var taskRawData = JSON.parse(rawData[i]);
-			var specTask = new task(taskRawData["cronTime"], taskRawData["periode"], taskRawData["daysOfExecution"], callback, taskRawData["source"], taskRawData["button"]);
-			this.taskList.push(specTask);
+			var rawData = JSON.parse(data)["taskList"];
+
+			for(var i = 0; i< rawData.length;i++)
+			{
+				var taskRawData = JSON.parse(rawData[i]);
+				var specTask = new task(taskRawData["cronTime"], taskRawData["periode"], taskRawData["daysOfExecution"], callback, taskRawData["source"], taskRawData["button"]);
+				this.taskList.push(specTask);
+			}
 		}
 	}
 	getAllTasks()

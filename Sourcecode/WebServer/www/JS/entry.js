@@ -15,10 +15,10 @@ function createEntryActivityFeed(source, button, timestamp, message) {
                     .append('<p><span>Button:</span>: '+button+' &nbsp; <span>Zeitstempel</span>: '+timestamp+'<br> <span>Message: </span>'+message+'</p>')));
 };
 
-function createEntryTaskFeed(source, button, timestamp, taskName) {
+function createEntryTaskFeed(source, button, timestamp, taskName, ID) {
     
     return $('<li></li>')
-            .append($('<div class="task"></div>')
+            .append($('<div class="task" id="'+ID+'" ></div>')
                 .append($('<div class="logo"></div>')
                     .append('<img src="'+sourceIconMapper[source]+'"></img>'))
                 .append($('<div class="task-content"></div>')
