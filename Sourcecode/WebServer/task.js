@@ -14,11 +14,14 @@ module.exports = class Task
 		this.source = source;
 		this.button = button;
 		this.border = daysOfExecution * this.periode;
-		this.cronJob = new CronJob(this.cronTime,this.cronJobFunction);
+		this.cronJob = new CronJob(this.cronTime, function(){
+
+			this.cronJobFunction();
+		}.bind(this));
 		this.ID = hash(this);
-		//cronJob.start();
+		this.cronJob.start();
 	}
-	
+
 	cronJobFunction()
 	{
 		this.countFunctioncalls++;
@@ -26,11 +29,11 @@ module.exports = class Task
 		if(this.countFunctioncalls>this.daysOfExecution && this.countFunctioncalls<= this.border)
 		{
 			if(this.border == this.countFunctioncalls)
-			this.countFunctioncalls = 0;
+				this.countFunctioncalls = 0;
 		}
 		else
 		{
-			callback(this.source, this.button);
+			this.callback(this.source, this.button);
 		}
 		
 	}

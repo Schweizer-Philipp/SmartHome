@@ -61,15 +61,15 @@ app.get('/activityfeed', function (request, response) {
     response.status(200).send(JSON.stringify(activityfeed));
 });
 
+app.delete('/deleteActivityfeed', function (request, response) {
+    
+    activityfeed = [];
+    response.status(200);
+});
+
 app.post('/dashboard/:source/', function (request, response) {
 
-    console.log("request incoming...");
-    console.log(request.params.source);
-    console.log(request.body);
-
     var button = ["BTN"].concat(Object.values(request.body)).join("_");
-
-    console.log(button);
 
     var p = sendIrSignal(request.params.source, button);
 
@@ -87,8 +87,6 @@ app.post('/task', function (request, response) {
     request.body["button"] = button;
 
     var message = specTaskManager.addNewTask(request.body, sendIrSignal);
-
-    console.log(specTaskManager.getAllTasks());
 
     if (!(message.includes("Error"))) {
         response.status(200).send(JSON.stringify({
@@ -117,10 +115,10 @@ app.delete('/task/:taskid', function (request, response) {
 });
 
 app.get('/allTasks', function (request, response) {
+    console.log("da");
     response.status(200).send(JSON.stringify(
         JSON.parse(specTaskManager.getAllTasks())
     ));
-
 });
 
 app.get('/temperatureAndHumidity', function (request, response) {
@@ -140,15 +138,11 @@ app.get('/temperatureAndHumidity', function (request, response) {
 
 function sendIrSignal(source, button) {
     return new Promise(function (resolve, reject) {
-        console.log("do something static");
-        console.log("source is " + source);
 
         options["args"] = [source];
 
 
         options["args"].push(button);
-
-        console.log(options);
 
         var pyshell = new PythonShell('irTransmitter.py', options);
 
@@ -164,7 +158,6 @@ function sendIrSignal(source, button) {
                 };
                 activityfeed.unshift(activity);
 
-                console.log("ich bin bei reject");
                 reject("Fehler beim irTransmitter script");
             }
             activity = {
@@ -174,7 +167,6 @@ function sendIrSignal(source, button) {
                 message: "Ausführung Erfolgreich"
             };
             activityfeed.unshift(activity);
-            console.log("ich bin bei resolve");
             resolve();
         });
     });

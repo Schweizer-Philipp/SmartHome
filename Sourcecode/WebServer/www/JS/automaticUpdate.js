@@ -1,10 +1,12 @@
-import { createEntryActivityFeed} from './entry.js';
+import { addActivityEntrys, addTaskEntrys } from './addEntrys.js';
 
 function allUpdates()
 {
+    console.log("da");
     ipAddress = document.querySelector('input[type="hidden"]').value;
     updateTemperature(ipAddress);
     updateActivityFeed(ipAddress);
+    updateTaskFeed(ipAddress);
 }
 
 function updateTemperature(ipAddress)
@@ -28,19 +30,33 @@ function updateActivityFeed(ipAddress)
 
     $.get(url)
         .done(function(response) {
-            var activityFeed = $('ul#activity-feed');
-            activityFeed.empty();
             var basis = JSON.parse(response);
-            for(var i = basis.length-1; i>=0;i--)
-            {
-              activityFeed.prepend(createEntryActivityFeed(basis[i]['source'],basis[i]['button'],basis[i]['timestamp'],basis[i]['message']));
-            }
+            addActivityEntrys(basis);
         })
         .fail(function() {
           
         }); 
 }
 
+function updateTaskFeed(ipAddress)
+{
+    var url = "http://"+ipAddress+":5400/allTasks";
+    
+    $.get(url)
+      .done(function(response) {
+          var basis = JSON.parse(response);
+          var tasks = basis['taskList'];
+          addTaskEntrys(tasks);
+          //alert(basis['message']);
+
+      })
+      .fail(function(response) {
+        console.log("Error bei get allTasks");
+      }); 
+};
+
 allUpdates();
 
-window.setInterval(allUpdates(),60*60000);
+window.setInterval(allUpdates,60000 * 20);
+
+export {updateActivityFeed};
