@@ -69,8 +69,8 @@ module.exports = class Task
 		return false;
 	}
 
-	toJSON = function()
+	toJSON()
 	{
 		return JSON.stringify({cronTime: this.cronTime, customName: this.customName, periode: this.periode, daysOfExecution: this.daysOfExecution, source: this.source, button: this.button, ID: this.ID, nextExecutionDay: this.getNextExecutionDay()});
-	};
+	}
 }

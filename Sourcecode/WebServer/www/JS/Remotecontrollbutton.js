@@ -17,13 +17,13 @@ function init()
         }.bind(this));
         button.addEventListener('contextmenu', function(ev) {
           ev.preventDefault();
-          var min = "18"//prompt("Welche Minute");
-          var std = "*";//prompt("Welche Stunde");
-          var dayOfTheMonth = "25";//prompt("Welche Tage im Monat");
-          var month = "*";//prompt("Welcher Monat");
-          var weekays = "*";//prompt("Welche Wochentage");
-          var customName = "Test";//prompt("Name für den Task");
-          var periode = "4";//prompt("Periode")
+          var min = prompt("Welche Minute");
+          var std = prompt("Welche Stunde");
+          var dayOfTheMonth = prompt("Welche Tage im Monat");
+          var month = prompt("Welcher Monat");
+          var weekays = prompt("Welche Wochentage");
+          var customName = prompt("Name für den Task");
+          var periode = prompt("Periode")
           var source = button.getAttribute('data-source');
           var buttonName = button.getAttribute('data-button_name');
           var url = "http://"+ipAddress+":5400/task";
@@ -81,6 +81,7 @@ function buttonSendLogic(button, ipAddress)
   $.post(url, body)
       .done(function(response) {
           var basis = JSON.parse(response);
+	  console.log(basis);
           addActivityEntrys(basis);
       })
       .fail(function(response) {

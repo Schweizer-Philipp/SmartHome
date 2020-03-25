@@ -70,14 +70,15 @@ app.delete('/deleteActivityfeed', function (request, response) {
 app.post('/dashboard/:source/', function (request, response) {
 
     var button = ["BTN"].concat(Object.values(request.body)).join("_");
-
+    
     var p = sendIrSignal(request.params.source, button);
-
+    
     p.then(function () {
         response.status(200).send(JSON.stringify(activityfeed));
     }).catch(function (error) {
         response.status(500).send(JSON.stringify(activityfeed));
     });
+    
 });
 
 app.post('/task', function (request, response) {
@@ -115,7 +116,6 @@ app.delete('/task/:taskid', function (request, response) {
 });
 
 app.get('/allTasks', function (request, response) {
-    console.log("da");
     response.status(200).send(JSON.stringify(
         JSON.parse(specTaskManager.getAllTasks())
     ));
@@ -138,18 +138,17 @@ app.get('/temperatureAndHumidity', function (request, response) {
 
 function sendIrSignal(source, button) {
     return new Promise(function (resolve, reject) {
-
+        
         options["args"] = [source];
-
 
         options["args"].push(button);
 
         var pyshell = new PythonShell('irTransmitter.py', options);
 
-        pyshell.on('message', function (message) {
-            console.log(message);
-            if (message != 0) {
-
+        pyshell.end(error => { 
+            if(error) 
+            {   
+                console.log("Fehler");
                 activity = {
                     source: source,
                     button: button,
@@ -157,18 +156,20 @@ function sendIrSignal(source, button) {
                     message: "Fehler beim irTransmitter script"
                 };
                 activityfeed.unshift(activity);
-
-                reject("Fehler beim irTransmitter script");
+                reject("Fehler beim irTransmitter script"); 
             }
-            activity = {
-                source: source,
-                button: button,
-                timestamp: getTimeStamp(),
-                message: "Ausführung Erfolgreich"
-            };
-            activityfeed.unshift(activity);
-            resolve();
-        });
+            else
+            {
+                activity = {
+                    source: source,
+                    button: button,
+                    timestamp: getTimeStamp(),
+                    message: "Ausführung Erfolgreich"
+                };
+                activityfeed.unshift(activity);
+                resolve(); 
+            }
+        }); 
     });
 }
 
