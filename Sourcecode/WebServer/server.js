@@ -67,6 +67,20 @@ app.delete('/deleteActivityfeed', function (request, response) {
     response.status(200);
 });
 
+app.post('/dashboard/task/:taskID', function (request, response) {
+
+    var task = specTaskManager.getTask(request.params.taskID);
+
+    var p = sendIrSignal(task.source, task.button);
+
+    p.then(function () {
+        response.status(200).send(JSON.stringify(activityfeed));
+    }).catch(function () {
+        response.status(500).send(JSON.stringify(activityfeed));
+    });
+
+});
+
 app.post('/dashboard/:source/', function (request, response) {
 
     var button = ["BTN"].concat(Object.values(request.body)).join("_");
@@ -75,7 +89,7 @@ app.post('/dashboard/:source/', function (request, response) {
     
     p.then(function () {
         response.status(200).send(JSON.stringify(activityfeed));
-    }).catch(function (error) {
+    }).catch(function () {
         response.status(500).send(JSON.stringify(activityfeed));
     });
     
@@ -116,6 +130,7 @@ app.delete('/task/:taskid', function (request, response) {
 });
 
 app.get('/allTasks', function (request, response) {
+
     response.status(200).send(JSON.stringify(
         JSON.parse(specTaskManager.getAllTasks())
     ));
@@ -137,6 +152,7 @@ app.get('/temperatureAndHumidity', function (request, response) {
 
 
 function sendIrSignal(source, button) {
+
     return new Promise(function (resolve, reject) {
         
         options["args"] = [source];
@@ -148,7 +164,7 @@ function sendIrSignal(source, button) {
         pyshell.end(error => { 
             if(error) 
             {   
-                console.log("Fehler");
+                console.log(error);
                 activity = {
                     source: source,
                     button: button,
@@ -176,11 +192,7 @@ function sendIrSignal(source, button) {
 
 function getTimeStamp() {
 
-    var today = new Date();
-
-    var timestamp = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear()+ ' um '+today.getHours() + ':' + today.getMinutes()+' Uhr';
-
-    return timestamp
+    return new Date();
 }
 
 app.listen(5400, function (error) {

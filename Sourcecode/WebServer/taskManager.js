@@ -13,17 +13,13 @@ module.exports = class TaskManager
 	{
 		var cronTime = data["cronTime"];
 		
-	
-		if(Number(cronTime["min"]) > 59 || Number(cronTime["min"]) < 0)
-			return "Error: CronTime min is wrong: "+cronTime["min"];
-		
 		if(Number(cronTime["std"]) > 23 || Number(cronTime["std"]) < 0)
 			return "Error: CronTime std is wrong: "+cronTime["min"];
 			
 		if(!(cronTime["dayOfTheMonth"] === "*" ^ cronTime["weekdays"] === "*"))
 			return "Error: CronTime dayOfTheMonth and weekdays are both * or both are not *";
 			
-		if(Number(cronTime["month"]) > 12 || Number(cronTime["month"]) < 1 || cronTime["month"] !== "*")
+		if((Number(cronTime["month"]) > 12 || Number(cronTime["month"]) < 1) && cronTime["month"] !== "*")
 			return "Error: CronTime month is wrong: "+cronTime["month"];
 			
 		if(Number(data["periode"]) < 1)
@@ -52,7 +48,7 @@ module.exports = class TaskManager
 		
 		this.taskList.push(specTask);
 		
-		//this.updateTaskFile();
+		this.updateTaskFile();
 
 		return  "Task wurde erfolgreich angelegt";
 	}
@@ -74,6 +70,13 @@ module.exports = class TaskManager
 		return "Task erfolgreich gelöscht";
 	}
 
+	getTask(ID)
+	{
+		return this.taskList.find(function (task) {
+			return task.getID() == ID;
+		});
+	}
+
 	updateTaskFile()
 	{
 		fs.writeFileSync("task_administration_config.txt",JSON.stringify(this));
@@ -89,7 +92,7 @@ module.exports = class TaskManager
 			for(var i = 0; i< rawData.length;i++)
 			{
 				var taskRawData = JSON.parse(rawData[i]);
-				var specTask = new task(taskRawData["cronTime"], taskRawData["periode"], taskRawData["daysOfExecution"], callback, taskRawData["source"], taskRawData["button"]);
+				var specTask = new task(taskRawData["cronTime"], taskRawData["customName"],taskRawData["periode"], taskRawData["daysOfExecution"], callback, taskRawData["source"], taskRawData["button"]);
 				this.taskList.push(specTask);
 			}
 		}

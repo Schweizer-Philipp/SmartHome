@@ -50,7 +50,7 @@ function updateTaskFeed(ipAddress)
           //alert(basis['message']);
 
       })
-      .fail(function(response) {
+      .fail(function() {
         console.log("Error bei get allTasks");
       }); 
 };

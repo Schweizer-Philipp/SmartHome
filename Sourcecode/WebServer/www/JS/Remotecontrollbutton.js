@@ -60,7 +60,7 @@ function init()
       }, false);
 
     }
-};
+}
 function buttonHaptics(button)
 {  
     button.classList.add("active");
@@ -68,7 +68,7 @@ function buttonHaptics(button)
     setTimeout(function(){
       button.classList.remove("active");
     },250);
-};
+}
 function buttonSendLogic(button, ipAddress) 
 {
   var source = button.getAttribute('data-source');
@@ -88,7 +88,7 @@ function buttonSendLogic(button, ipAddress)
         var basis = JSON.parse(response);
         addActivityEntrys(basis);
       }); 
-};
+}
 
 
 init();

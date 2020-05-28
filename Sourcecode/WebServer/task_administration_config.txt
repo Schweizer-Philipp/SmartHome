@@ -1,0 +1,1 @@
+{"taskList":["{\"cronTime\":\"8 8 8 * *\",\"customName\":\"7\",\"periode\":\"7\",\"daysOfExecution\":1,\"source\":\"led_bett\",\"button\":\"BTN_white\",\"ID\":\"a5604b4d0b617db0b855cdb75a9a0ba43eb878eb\",\"nextExecutionDay\":\"2020-06-08T08:08:00+02:00\"}"]}

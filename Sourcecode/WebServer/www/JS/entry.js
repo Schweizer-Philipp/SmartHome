@@ -1,3 +1,4 @@
+import { haptic, executeButton, deleteButton, showMoreButton  }  from './taskFeedButtons.js';
 
 sourceIconMapper = {
     'led_bett' : 'data:image/png;base64,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',
@@ -16,21 +17,22 @@ function createEntryActivityFeed(source, button, timestamp, message) {
 };
 
 function createEntryTaskFeed(source, button, timestamp, taskName, ID) {
-    
+
     return $('<li></li>')
             .append($('<div class="task" id="'+ID+'" ></div>')
                 .append($('<div class="logo"></div>')
-                    .append('<img src="'+sourceIconMapper[source]+'"></img>'))
+                    .append('<img src="' + sourceIconMapper[source] + '"/>'))
                 .append($('<div class="task-content"></div>')
                     .append('<h2>'+taskName+'</h2>')  
-                    .append('<p><span>Quelle</span>:'+source+' &nbsp; <span>Aktion</span>:'+button+' <br> <span>Nächste Ausführung</span>:'+timestamp+'</p>'))
+                    .append('<p><span>Quelle</span>:'+source+' &nbsp; <span>Aktion</span>:'+button+' <br> <span>Nächste Ausführung</span>: '+timestamp+'</p>'))
                 .append($('<div class="buttonBar"></div>')
-                    .append($('<div class="smallButton"></div>')
-                        .append('<img src="https://img.icons8.com/metro/52/000000/next.png"></img>'))
-                    .append($('<div class="smallButton"></div>')
-                        .append('<img src="https://img.icons8.com/ios-filled/50/000000/delete-forever.png"></img>'))
-                    .append($('<div class="smallButton"></div>')
-                        .append('<img src="https://img.icons8.com/ios-filled/50/000000/circled-chevron-down.png"></img>'))));
+                    .append($('<div class="smallButton"></div>').on('click',(event)=>haptic(executeButton,ID,event.target.parentNode))
+                        .append('<img src="https://img.icons8.com/metro/52/000000/next.png"/>'))
+                    .append($('<div class="smallButton"></div>').on('click',(event)=>haptic(deleteButton,ID,event.target.parentNode))
+                        .append('<img src="https://img.icons8.com/ios-filled/50/000000/delete-forever.png"/>'))
+                    .append($('<div class="smallButton"></div>').on('click',(event)=>haptic(showMoreButton,ID,event.target.parentNode))
+                        .append('<img src="https://img.icons8.com/ios-filled/50/000000/circled-chevron-down.png"/>'))))
+
 };
 
 export { createEntryActivityFeed, createEntryTaskFeed };
